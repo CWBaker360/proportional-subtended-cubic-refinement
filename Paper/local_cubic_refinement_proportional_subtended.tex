@@ -1,0 +1,1269 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=blue!50!black,
+  urlcolor=blue!50!black
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Rop}{\mathscr{R}}
+\newcommand{\Phiop}{\Phi}
+\newcommand{\Qop}{Q}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+\title{A Local Cubic Refinement Law for Proportional-Subtended Angle Division}
+\author{Wayne Baker\\Independent Researcher\\Goulds, Newfoundland and Labrador, Canada}
+\date{July 2, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove a local cubic refinement law for approximate angle division generated
+by proportional-subtended chord transfer.  For positive integers $a$ and $b$,
+consider the seed operator
+\[
+D_{a,b}(\theta)
+=
+2\arcsin\!\left(
+\frac{a}{b}\sin\frac{\theta}{2a}
+\right),
+\]
+whose intended target is $\theta/b$.  On the local principal branch,
+\[
+D_{a,b}(\theta)-\frac{\theta}{b}
+=
+\frac{a^2-b^2}{24a^2b^3}\theta^3+O(\theta^5).
+\]
+For a signed error $e$, define
+\[
+\Phiop_{a,b}(x)
+=
+2\arcsin\!\left(
+\frac{a}{b}\sin\frac{x}{2}
+\right),
+\qquad
+\Rop_{a,b}(e)
+=
+e-
+\Phiop_{a,b}\!\left(\frac{b}{a}e\right).
+\]
+Then, for every nonidentity branch $a\ne b$,
+\[
+\Rop_{a,b}(e)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3+O(e^5).
+\]
+The defect scaling $b/a$ is the unique constant scaling that cancels the
+linear term in the one-transfer correction class, so the cubic term is sharp
+within that class.  Repeated residual correction triples the local error
+order, producing the hierarchy
+\[
+3,\quad 9,\quad 27,\quad 81,\ldots .
+\]
+The theorem is local and asymptotic; it is not a global angle-division theorem.
+A direct finite compass-and-straightedge realization is proved for the
+repeated-bisection subclass $a=2^m$.  A final two-sample chord calculation
+shows how fifth-order residuals can arise once a second chord sample is
+admitted, indicating a natural higher-order extension beyond the one-transfer
+operator studied here.
+\end{abstract}
+
+\section*{Overview}
+\label{sec:overview}
+
+This paper isolates a local mechanism behind a family of approximate angle
+division operators.  The mechanism is simple but rigid: a proportional chord
+transfer has a linear part and a cubic defect; when the signed error is scaled
+by $b/a$, the linear part cancels exactly.  The first surviving term is cubic.
+
+The claims are deliberately separated.
+
+\begin{enumerate}[label=\arabic*.]
+\item The seed operator $D_{a,b}$ has an explicit cubic local error.
+
+\item The residual operator $\Rop_{a,b}$ has an explicit cubic local error law.
+
+\item The scaling $b/a$ is the unique constant scaling that cancels the linear
+term in the one-transfer residual class.
+
+\item Therefore, repeated residual correction triples the local order of the
+remaining error.
+
+\item A direct Euclidean realization is proved for the repeated-bisection
+subclass $a=2^m$.
+
+\item A two-sample chord calculation demonstrates that fifth-order residuals
+are possible once the construction is allowed an additional chord sample.
+\end{enumerate}
+
+The analytic theorem and the finite construction theorem are related but not
+identical.  The local error law holds for every positive integer pair $a\ne b$
+on the local principal branch.  The direct construction statement is narrower:
+it gives a sufficient compass-and-straightedge realization when the required
+defect division is obtained by repeated bisection.
+
+\section{Introduction}
+\label{sec:introduction}
+
+Classical exact angle division is constrained by Euclidean constructibility.
+The best-known example is the impossibility of trisecting an arbitrary angle
+by straightedge and compass alone.  The present paper addresses a different
+question: how certain finite geometric approximation operators behave locally
+under residual correction.
+
+The construction begins with a proportional-subtended seed.  A chord
+subtending an auxiliary angle at one radius is transferred proportionally to a
+second radius, and the new subtended angle is used as an approximation to a
+desired divided angle.  The same transfer operation is then applied to a
+signed defect in order to correct the approximation.
+
+The motivating $4:3$ instance is Baker's approximate-trisection
+construction. Rostamian analyzed this special case, deriving its local cubic
+seed error and the ninth-order error produced by one residual improvement
+\cite{RostamianBaker}. The present paper begins from that branch but addresses
+a more general problem: it derives the local law for arbitrary
+proportional-subtended parameters $(a,b)$, proves that $b/a$ is the unique
+constant defect scaling that cancels the linear term in the one-transfer
+class, and establishes the resulting iterated cubic hierarchy.
+
+The central point is not merely that the resulting error is small.  The local
+error map can be computed explicitly.  Its linear term cancels identically
+because the defect is scaled by $b/a$, and the first nonzero term is cubic:
+\[
+\Rop_{a,b}(e)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3+O(e^5).
+\]
+This makes the cubic order a structural consequence of the chord-transfer
+operator rather than a numerical coincidence.
+
+The result should be compared with, but not confused with, classical cubic
+iteration schemes such as Halley--Householder methods.  This paper does not
+claim a new general theory of third-order iteration.  Its contribution is
+more specific: it identifies a geometrically interpretable residual map whose
+third-order behavior follows from the proportional-subtended transfer law.
+The nonlinearity enters through the chord-transfer operator
+\[
+\Phiop_{a,b}(x)
+=
+2\arcsin\!\left(
+\frac{a}{b}\sin\frac{x}{2}
+\right),
+\]
+not through an arbitrary numerical correction applied to a linear equation.
+
+All asymptotic expansions in the paper are local expansions in radians.
+
+\section{Branch Conventions and Chord-Transfer Interpretation}
+\label{sec:branch-conventions}
+
+All inverse trigonometric functions are interpreted on their principal real
+branches.  The local theory is carried out near the origin, where all arcsine
+arguments remain in $[-1,1]$ and the selected branches define single-valued
+analytic representatives.
+
+The basic transfer map is
+\[
+\Phiop_{a,b}(x)
+=
+2\arcsin\!\left(
+\frac{a}{b}\sin\frac{x}{2}
+\right).
+\]
+Its real-valuedness condition is
+\[
+\left|
+\frac{a}{b}\sin\frac{x}{2}
+\right|
+\le 1.
+\]
+If $a\le b$, this inequality is automatically satisfied for every real $x$,
+although the local principal-branch convention still matters.  If $a>b$, a
+sufficient symmetric local condition is
+\[
+|x|
+\le
+2\arcsin\frac{b}{a}.
+\]
+For residual refinement the transfer argument is
+\[
+x=\frac{b}{a}e.
+\]
+Thus, when $a>b$, a convenient sufficient local condition is
+\[
+|e|
+\le
+\frac{2a}{b}\arcsin\frac{b}{a}.
+\]
+When $a\le b$, the arcsine input is bounded in magnitude by $a/b$, so the
+real-valuedness condition is automatic; nevertheless, the theorem remains a
+local statement near $e=0$.
+
+The trigonometric notation is an analytic model of a Euclidean chord
+operation.  A term $\sin(x/2)$ represents the half-chord ratio of a central
+angle $x$.  A term $2\arcsin(s)$ represents the central angle whose half-chord
+ratio is $s$ on the chosen branch.  In the finite construction statements,
+these operations are realized by constructing chords, transferring lengths,
+and recovering central angles, not by numerical evaluation of transcendental
+functions.
+
+\section{The Proportional-Subtended Seed}
+\label{sec:seed}
+
+\begin{definition}[Proportional-subtended seed]
+Let $a$ and $b$ be positive integers.  Define
+\[
+D_{a,b}(\theta)
+=
+2\arcsin\!\left(
+\frac{a}{b}\sin\frac{\theta}{2a}
+\right).
+\]
+The intended target is $\theta/b$, and the signed seed error is
+\[
+e^{(a,b)}_0(\theta)
+=
+D_{a,b}(\theta)-\frac{\theta}{b}.
+\]
+\end{definition}
+
+\begin{lemma}[Seed expansion]
+\label{lem:seed-expansion}
+For positive integers $a$ and $b$,
+\[
+D_{a,b}(\theta)
+=
+\frac{\theta}{b}
++
+\frac{a^2-b^2}{24a^2b^3}\theta^3
++
+O(\theta^5).
+\]
+Consequently,
+\[
+e^{(a,b)}_0(\theta)
+=
+\frac{a^2-b^2}{24a^2b^3}\theta^3
++
+O(\theta^5).
+\]
+\end{lemma}
+
+\begin{proof}
+Use the local expansions
+\[
+\sin x=x-\frac{x^3}{6}+O(x^5),
+\qquad
+\arcsin y=y+\frac{y^3}{6}+O(y^5).
+\]
+First,
+\[
+\sin\frac{\theta}{2a}
+=
+\frac{\theta}{2a}
+-
+\frac{\theta^3}{48a^3}
++
+O(\theta^5).
+\]
+Multiplying by $a/b$ gives
+\[
+\frac{a}{b}\sin\frac{\theta}{2a}
+=
+\frac{\theta}{2b}
+-
+\frac{\theta^3}{48a^2b}
++
+O(\theta^5).
+\]
+Applying the arcsine expansion,
+\[
+\arcsin\!\left(
+\frac{a}{b}\sin\frac{\theta}{2a}
+\right)
+=
+\frac{\theta}{2b}
+-
+\frac{\theta^3}{48a^2b}
++
+\frac{\theta^3}{48b^3}
++
+O(\theta^5).
+\]
+After multiplication by $2$,
+\[
+D_{a,b}(\theta)
+=
+\frac{\theta}{b}
++
+\left(
+-
+\frac{1}{24a^2b}
++
+\frac{1}{24b^3}
+\right)\theta^3
++
+O(\theta^5).
+\]
+Since
+\[
+-
+\frac{1}{24a^2b}
++
+\frac{1}{24b^3}
+=
+\frac{a^2-b^2}{24a^2b^3},
+\]
+the result follows.
+\end{proof}
+
+\begin{remark}[Overshoot, undershoot, and the identity branch]
+The sign of the leading seed error is determined by $a^2-b^2$.  If $a>b$,
+the seed locally overshoots $\theta/b$.  If $a<b$, the seed locally
+undershoots $\theta/b$.  The identity branch $a=b$ is exceptional: on the
+local principal branch,
+\[
+D_{a,a}(\theta)=\frac{\theta}{a},
+\]
+so the seed error vanishes identically.
+\end{remark}
+
+\section{The Transfer Map and the Residual Law}
+\label{sec:residual-law}
+
+\begin{definition}[Transfer map]
+For positive integers $a$ and $b$, define
+\[
+\Phiop_{a,b}(x)
+=
+2\arcsin\!\left(
+\frac{a}{b}\sin\frac{x}{2}
+\right).
+\]
+\end{definition}
+
+\begin{lemma}[Transfer-map expansion]
+\label{lem:transfer-expansion}
+The transfer map satisfies
+\[
+\Phiop_{a,b}(x)
+=
+\frac{a}{b}x
++
+\frac{a(a^2-b^2)}{24b^3}x^3
++
+O(x^5).
+\]
+It is odd wherever it is real-valued:
+\[
+\Phiop_{a,b}(-x)=-\Phiop_{a,b}(x).
+\]
+\end{lemma}
+
+\begin{proof}
+Expanding directly,
+\[
+\frac{a}{b}\sin\frac{x}{2}
+=
+\frac{a}{2b}x
+-
+\frac{a}{48b}x^3
++
+O(x^5),
+\]
+and hence
+\[
+\arcsin\!\left(
+\frac{a}{b}\sin\frac{x}{2}
+\right)
+=
+\frac{a}{2b}x
+-
+\frac{a}{48b}x^3
++
+\frac{a^3}{48b^3}x^3
++
+O(x^5).
+\]
+Multiplication by $2$ gives
+\[
+\Phiop_{a,b}(x)
+=
+\frac{a}{b}x
++
+\frac{a(a^2-b^2)}{24b^3}x^3
++
+O(x^5).
+\]
+Oddness follows because $\sin(x/2)$ and $\arcsin x$ are odd on their local
+principal real branches.
+\end{proof}
+
+\begin{definition}[Signed-defect residual operator]
+For a signed error $e$, define
+\[
+\Rop_{a,b}(e)
+=
+e-
+\Phiop_{a,b}\!\left(\frac{b}{a}e\right).
+\]
+\end{definition}
+
+\begin{theorem}[Universal proportional-subtended cubic error law]
+\label{thm:universal-law}
+Let $a$ and $b$ be positive integers with $a\ne b$.  Then
+\[
+\Rop_{a,b}(e)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3
++
+O(e^5).
+\]
+Thus the linear term cancels identically, and the first nonzero term is cubic.
+\end{theorem}
+
+\begin{proof}
+Insert $x=(b/a)e$ into Lemma~\ref{lem:transfer-expansion}:
+\[
+\Phiop_{a,b}\!\left(\frac{b}{a}e\right)
+=
+\frac{a}{b}\left(\frac{b}{a}e\right)
++
+\frac{a(a^2-b^2)}{24b^3}
+\left(\frac{b}{a}e\right)^3
++
+O(e^5).
+\]
+Therefore
+\[
+\Phiop_{a,b}\!\left(\frac{b}{a}e\right)
+=
+e+
+\frac{a^2-b^2}{24a^2}e^3
++
+O(e^5).
+\]
+Subtracting this expression from $e$ gives
+\[
+\Rop_{a,b}(e)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3
++
+O(e^5).
+\]
+Because $a\ne b$, the cubic coefficient is nonzero.
+\end{proof}
+
+\section{Uniqueness of the Scaling and One-Transfer Sharpness}
+\label{sec:sharpness}
+
+The defect scaling $b/a$ is not a heuristic tuning parameter.  It is the
+unique constant scaling that cancels the linear term of the proportional-
+subtended transfer map.  This makes the cubic law sharp within the correction
+class that uses one transfer map applied to one constant multiple of the signed
+defect.
+
+Let
+\[
+r=\frac{a}{b}.
+\]
+Then
+\[
+\Phiop_{a,b}(x)
+=
+2\arcsin\!\left(r\sin\frac{x}{2}\right)
+=
+rx+
+\frac{r(r^2-1)}{24}x^3
++
+O(x^5).
+\]
+For a constant $\lambda$, consider
+\[
+\Rop^{(a,b)}_{\lambda}(e)
+=
+e-
+\Phiop_{a,b}(\lambda e).
+\]
+Then
+\[
+\Rop^{(a,b)}_{\lambda}(e)
+=
+(1-r\lambda)e
+-
+\frac{r(r^2-1)\lambda^3}{24}e^3
++
+O(e^5).
+\]
+The linear term vanishes if and only if
+\[
+1-r\lambda=0,
+\]
+or equivalently
+\[
+\lambda=\frac{1}{r}=\frac{b}{a}.
+\]
+For this unique value,
+\[
+\Rop^{(a,b)}_{b/a}(e)
+=
+-
+\frac{r^2-1}{24r^2}e^3
++
+O(e^5)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3
++
+O(e^5).
+\]
+For every nonidentity branch $a\ne b$, this cubic coefficient is nonzero.
+Therefore no one-transfer correction of the form
+\[
+e-
+\Phiop_{a,b}(\lambda e)
+\]
+can have local order greater than three.
+
+This sharpness is a ceiling only for the one-transfer, constant-scaled defect
+class.  It is not an obstruction to higher local order once additional chord
+samples or other constructible degrees of freedom are introduced.
+
+\section{The Cubic Cascade and Leading Coefficients}
+\label{sec:cubic-cascade}
+
+Define the seed approximation by
+\[
+X^{(a,b)}_0(\theta)=D_{a,b}(\theta),
+\]
+and define recursively
+\[
+X^{(a,b)}_{k+1}(\theta)
+=
+\frac{\theta}{b}
++
+\Rop_{a,b}\!\left(
+X^{(a,b)}_k(\theta)-\frac{\theta}{b}
+\right).
+\]
+Equivalently, if
+\[
+e^{(a,b)}_k(\theta)
+=
+X^{(a,b)}_k(\theta)-\frac{\theta}{b},
+\]
+then
+\[
+e^{(a,b)}_{k+1}(\theta)
+=
+\Rop_{a,b}\!\left(e^{(a,b)}_k(\theta)\right).
+\]
+
+\begin{theorem}[General proportional-subtended cubic cascade]
+\label{thm:general-cubic-cascade}
+Suppose that, for some $k\ge 0$,
+\[
+e^{(a,b)}_k(\theta)
+=
+c^{(a,b)}_k\theta^{q_k}
++
+O(\theta^{q_k+2}),
+\qquad
+c^{(a,b)}_k\ne 0.
+\]
+Then
+\[
+e^{(a,b)}_{k+1}(\theta)
+=
+-
+\frac{a^2-b^2}{24a^2}
+\left(c^{(a,b)}_k\right)^3
+\theta^{3q_k}
++
+O(\theta^{3q_k+2}).
+\]
+Consequently,
+\[
+q_{k+1}=3q_k.
+\]
+Since the seed has $q_0=3$, one obtains
+\[
+q_k=3^{k+1}.
+\]
+Thus the local error orders are
+\[
+3,\quad 9,\quad 27,\quad 81,\ldots .
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:universal-law},
+\[
+\Rop_{a,b}(e)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3
++
+O(e^5).
+\]
+Thus
+\[
+e^{(a,b)}_{k+1}(\theta)
+=
+-
+\frac{a^2-b^2}{24a^2}
+\left(e^{(a,b)}_k(\theta)\right)^3
++
+O\!\left(\left(e^{(a,b)}_k(\theta)\right)^5\right).
+\]
+Now assume
+\[
+e^{(a,b)}_k(\theta)
+=
+c^{(a,b)}_k\theta^{q_k}
++
+O(\theta^{q_k+2}).
+\]
+Cubing gives
+\[
+\left(e^{(a,b)}_k(\theta)\right)^3
+=
+\left(c^{(a,b)}_k\right)^3\theta^{3q_k}
++
+O(\theta^{3q_k+2}),
+\]
+because the first cross-term has order $2q_k+(q_k+2)=3q_k+2$.  Also,
+\[
+\left(e^{(a,b)}_k(\theta)\right)^5
+=
+O(\theta^{5q_k}).
+\]
+For the cascade generated from the seed, $q_k\ge 3$, so $5q_k\ge 3q_k+2$.
+The $O(e_k^5)$ contribution is therefore absorbed into
+$O(\theta^{3q_k+2})$.  This proves the displayed recurrence and hence
+$q_{k+1}=3q_k$.  Since Lemma~\ref{lem:seed-expansion} gives $q_0=3$, induction
+gives $q_k=3^{k+1}$.
+\end{proof}
+
+\begin{corollary}[Leading-coefficient recurrence]
+\label{cor:leading-coefficients}
+The leading coefficients satisfy
+\[
+c^{(a,b)}_{k+1}
+=
+-
+\frac{a^2-b^2}{24a^2}
+\left(c^{(a,b)}_k\right)^3,
+\]
+with
+\[
+c^{(a,b)}_0
+=
+\frac{a^2-b^2}{24a^2b^3}.
+\]
+Equivalently,
+\[
+c^{(a,b)}_k
+=
+(-1)^k
+\left(
+\frac{a^2-b^2}{24a^2}
+\right)^{(3^k-1)/2}
+\left(
+\frac{a^2-b^2}{24a^2b^3}
+\right)^{3^k}.
+\]
+\end{corollary}
+
+\begin{proof}
+The recurrence follows directly from
+Theorem~\ref{thm:general-cubic-cascade}.  Iterating it gives the closed form:
+the exponent of the residual coefficient is
+\[
+0,\quad 1,\quad 4,\quad 13,\ldots,
+\]
+namely $(3^k-1)/2$, while the exponent of the seed coefficient is multiplied
+by $3$ at every stage, giving $3^k$.  The sign alternates once per refinement,
+giving $(-1)^k$.
+\end{proof}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+\toprule
+Branch & Target & Seed sign & Local order cascade \\
+\midrule
+$1:2$ & $\theta/2$ & negative & $3,9,27,81,\ldots$ \\
+$2:3$ & $\theta/3$ & negative & $3,9,27,81,\ldots$ \\
+$3:2$ & $\theta/2$ & positive & $3,9,27,81,\ldots$ \\
+$4:3$ & $\theta/3$ & positive & $3,9,27,81,\ldots$ \\
+$3:4$ & $\theta/4$ & negative & $3,9,27,81,\ldots$ \\
+$5:4$ & $\theta/4$ & positive & $3,9,27,81,\ldots$ \\
+\bottomrule
+\end{tabular}
+\caption{Representative proportional-subtended branches.  The sign records the
+leading sign of the seed error.}
+\label{tab:representative-branches}
+\end{table}
+
+\section{Euclidean Realization}
+\label{sec:geometry}
+
+The analytic refinement argument is
+\[
+\frac{b}{a}e
+=
+\frac{bX-\theta}{a},
+\]
+where $X$ is a current approximation to $\theta/b$.  The angle $bX-\theta$ can
+be formed by repeated angle copying and subtraction.  The remaining operation
+is division of that constructed defect angle by $a$, followed by the
+proportional-subtended transfer map.
+
+\begin{lemma}[Euclidean realization of the transfer map]
+\label{lem:transfer-realization}
+Let $a$ and $b$ be positive constructible radii, and let $x$ be a constructed
+signed angle.  Suppose
+\[
+\left|
+\frac{a}{b}\sin\frac{x}{2}
+\right|
+\le 1.
+\]
+Then the angle
+\[
+\Phiop_{a,b}(x)
+=
+2\arcsin\!\left(
+\frac{a}{b}\sin\frac{x}{2}
+\right)
+\]
+is constructible from $x$, $a$, and $b$.
+\end{lemma}
+
+\begin{proof}
+Construct a circle of radius $a$.  On this circle, construct the chord
+subtended by the signed central angle $x$.  Its directed chord length is
+\[
+2a\sin\frac{x}{2}.
+\]
+Transfer this chord length to a circle of radius $b$.  Let $\Phi$ be the signed
+central angle subtended by the transferred chord on the radius-$b$ circle.
+Then
+\[
+2b\sin\frac{\Phi}{2}
+=
+2a\sin\frac{x}{2}.
+\]
+Therefore
+\[
+\sin\frac{\Phi}{2}
+=
+\frac{a}{b}\sin\frac{x}{2},
+\]
+and, on the chosen local principal branch,
+\[
+\Phi
+=
+2\arcsin\!\left(
+\frac{a}{b}\sin\frac{x}{2}
+\right)
+=
+\Phiop_{a,b}(x).
+\]
+Thus the transfer map is realized by chord construction and chord transfer.
+\end{proof}
+
+\begin{proposition}[Sufficient repeated-bisection realization criterion]
+\label{prop:bisection-realization}
+Suppose $a=2^m$ for some integer $m\ge 0$.  Then the defect angle
+\[
+\frac{bX-\theta}{a}
+\]
+can be obtained from $bX-\theta$ by $m$ successive bisections.  Hence, whenever
+the required copied and subtracted angles are available in the chosen geometric
+setup and the transfer lies in the real branch domain, the proportional-
+subtended refinement step has a direct repeated-bisection realization.
+\end{proposition}
+
+\begin{proof}
+Repeated angle copying constructs $bX$.  Subtracting the input angle constructs
+$bX-\theta$.  If $a=2^m$, then $m$ successive bisections construct
+$(bX-\theta)/a$.  Lemma~\ref{lem:transfer-realization} then realizes
+$\Phiop_{a,b}$, and the sign of the defect determines the orientation of the
+final correction.
+\end{proof}
+
+\begin{example}[The $4:3$ trisection branch]
+For $a=4$ and $b=3$, the target is $\theta/3$.  Let $X$ be a current
+approximation to $\theta/3$, and write
+\[
+X=\frac{\theta}{3}+e.
+\]
+The constructed defect angle is
+\[
+3X-\theta=3e.
+\]
+Since $a=4$, two bisections construct
+\[
+\frac{3X-\theta}{4}=\frac{3}{4}e.
+\]
+Applying the transfer map gives
+\[
+\Phiop_{4,3}\!\left(\frac{3X-\theta}{4}\right)
+=
+2\arcsin\!\left(
+\frac{4}{3}\sin\frac{3X-\theta}{8}
+\right).
+\]
+Thus the refined approximation is
+\[
+X_{\mathrm{new}}
+=
+X-
+2\arcsin\!\left(
+\frac{4}{3}\sin\frac{3X-\theta}{8}
+\right).
+\]
+This is the $4:3$ residual correction associated with Baker's trisection
+construction and Rostamian's special-case error analysis
+\cite{RostamianBaker}.
+\end{example}
+
+\begin{remark}[Sufficient, not complete]
+The condition $a=2^m$ is a sufficient criterion for the most direct
+construction based on angle copying, subtraction, and repeated bisection.  It
+is not claimed to classify all possible compass-and-straightedge realizations.
+\end{remark}
+
+\begin{remark}[Analytic law versus finite construction]
+The local cubic law
+\[
+\Rop_{a,b}(e)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3+O(e^5)
+\]
+holds analytically for every nonidentity branch $a\ne b$.  The direct finite
+construction above is proved only for the repeated-bisection subclass
+$a=2^m$.  These are distinct claims.
+\end{remark}
+
+\section{A Two-Sample Chord Correction}
+\label{sec:two-sample}
+
+The one-transfer sharpness result does not preclude higher local order.  It
+only says that a correction of the form
+\[
+e-\Phiop_{a,b}(\lambda e)
+\]
+cannot exceed cubic order for $a\ne b$.  Higher order requires another degree
+of freedom.  A natural geometric source is a second chord sample obtained by
+bisecting the defect angle.
+
+Let
+\[
+r=\frac{a}{b},
+\qquad
+ y=\frac{e}{r}=\frac{b}{a}e.
+\]
+The cubic correction uses the single chord sample
+\[
+\sin\frac{y}{2}.
+\]
+If the defect angle $y$ is bisected first, then the chord of the bisected
+defect supplies a second sample,
+\[
+\sin\frac{y}{4}.
+\]
+Consider the two-sample expression
+\[
+A\sin\frac{y}{2}
++
+B\sin\frac{y}{4},
+\]
+and define
+\[
+\Qop_r(y)
+=
+2\arcsin\!\left(
+r\left(
+A\sin\frac{y}{2}
++
+B\sin\frac{y}{4}
+\right)
+\right).
+\]
+We choose $A$ and $B$ so that $\Qop_r(y)$ agrees with $ry$ through cubic order.
+Using
+\[
+\sin\frac{y}{2}
+=
+\frac{y}{2}-\frac{y^3}{48}+O(y^5),
+\]
+and
+\[
+\sin\frac{y}{4}
+=
+\frac{y}{4}-\frac{y^3}{384}+O(y^5),
+\]
+the matching conditions reduce to
+\[
+A+\frac{B}{2}=1,
+\qquad
+A+\frac{B}{8}=r^2.
+\]
+Solving gives
+\[
+A=\frac{4r^2-1}{3},
+\qquad
+B=\frac{8(1-r^2)}{3}.
+\]
+With these choices,
+\[
+\Qop_r(y)
+=
+ry
+-
+\frac{r(r^2-1)(4r^2-1)}{7680}y^5
++
+O(y^7).
+\]
+Consequently,
+\[
+e-
+\Qop_r\!\left(\frac{e}{r}\right)
+=
+\frac{(r^2-1)(4r^2-1)}{7680r^4}e^5
++
+O(e^7).
+\]
+Thus cubic order is sharp for the one-transfer correction, but it is not an
+absolute barrier once additional chord samples are admitted.
+
+For the $4:3$ branch,
+\[
+r=\frac{4}{3},
+\]
+so
+\[
+A=\frac{55}{27},
+\qquad
+B=-\frac{56}{27}.
+\]
+The corresponding two-sample correction is
+\[
+\Qop_{4/3}(y)
+=
+2\arcsin\!\left(
+\frac{4}{3}
+\left(
+\frac{55}{27}\sin\frac{y}{2}
+-
+\frac{56}{27}\sin\frac{y}{4}
+\right)
+\right),
+\]
+and its residual begins at fifth order:
+\[
+e-
+\Qop_{4/3}\!\left(\frac{3e}{4}\right)
+=
+\frac{77}{393216}e^5
++
+O(e^7).
+\]
+
+This section is included to clarify the scope of the sharpness theorem.  The
+systematic construction and analysis of higher-order chord-combination
+corrections is left as a future problem.
+
+\section{Numerical Consistency Checks}
+\label{sec:numerical}
+
+The computations in this section are consistency checks only.  They are not
+used in the proof of the local cubic law, and they do not enlarge the finite
+geometric-realization claim.  In particular, the computations do not establish
+global convergence and do not classify which branches admit compass-and-
+straightedge realizations.
+
+For representative branches, we evaluated both the seed error
+\[
+D_{a,b}(\theta)-\frac{\theta}{b}
+\]
+and the refinement residual
+\[
+\Rop_{a,b}(e)
+=
+e-
+\Phiop_{a,b}\!\left(\frac{b}{a}e\right).
+\]
+The predicted local laws are
+\[
+D_{a,b}(\theta)-\frac{\theta}{b}
+=
+\frac{a^2-b^2}{24a^2b^3}\theta^3+O(\theta^5),
+\]
+and
+\[
+\Rop_{a,b}(e)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3+O(e^5).
+\]
+Thus log--log fits should approach slope $3$ as the input scale tends to zero.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+\toprule
+Branch & Seed slope & Refinement slope & Consistency \\
+\midrule
+$1:2$ & $3.0046193339$ & $3.0006346375$ & Consistent \\
+$2:3$ & $3.0028122658$ & $3.0008598848$ & Consistent \\
+$3:2$ & $3.0080787730$ & $3.0010922823$ & Consistent \\
+$4:3$ & $3.0035274023$ & $3.0010770871$ & Consistent \\
+$3:4$ & $3.0016941563$ & $3.0009206657$ & Consistent \\
+$5:4$ & $3.0019634516$ & $3.0010671119$ & Consistent \\
+\bottomrule
+\end{tabular}
+\caption{Representative high-precision consistency checks for the local cubic
+law.  The slopes are numerical log--log estimates and are included only to
+confirm that direct evaluation reproduces the cubic behavior predicted by the
+proof.}
+\label{tab:numerical-slopes}
+\end{table}
+
+As a concrete scale example, take the $4:3$ branch and $\theta=60^\circ$.  The
+seed error is approximately
+\[
+4.50\times 10^{-2}\text{ degrees}.
+\]
+After one residual correction, the error is approximately
+\[
+5.06\times 10^{-10}\text{ degrees},
+\]
+and after a second correction it is approximately
+\[
+7.20\times 10^{-34}\text{ degrees}.
+\]
+These numbers illustrate the order-tripling effect in the familiar trisection
+branch.  The proof is the formal expansion of $\Rop_{a,b}$, not the numerical
+table.
+
+As a broader stress check for the $4:3$ branch,
+Table~\ref{tab:large-angle-stress} records signed errors for several larger
+input angles.  These computations are not a global convergence theorem; they
+only show that, for these tested angles, the residual correction continues to
+produce rapid error reduction.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Input $\theta$ & Seed error $e_0$ & First residual $e_1$ & Second residual $e_2$ \\
+\midrule
+$45^\circ$  & $+1.887774001933852\times 10^{-2}$ & $-3.735696264404784\times 10^{-11}$ & $+2.894917723791054\times 10^{-37}$ \\
+$135^\circ$ & $+5.416639994179353\times 10^{-1}$ & $-8.825017205888855\times 10^{-7}$  & $+3.816526069041368\times 10^{-24}$ \\
+$225^\circ$ & $+2.883353443312359\times 10^{0}$  & $-1.331469483006689\times 10^{-4}$  & $+1.310735921489383\times 10^{-17}$ \\
+$315^\circ$ & $+1.052789884545587\times 10^{1}$  & $-6.502746781381637\times 10^{-3}$  & $+1.526905220006051\times 10^{-12}$ \\
+\bottomrule
+\end{tabular}
+\caption{Large-angle numerical stress check for the $4:3$ branch.  Errors are
+signed errors in degrees, rounded to approximately double-precision reporting
+level.  The table illustrates rapid residual reduction for the tested angles,
+but it is not a global convergence theorem.}
+\label{tab:large-angle-stress}
+\end{table}
+
+The larger examples show why the theorem is best interpreted as a local
+residual law rather than merely as a small-$\theta$ seed expansion: once the
+seed defect is sufficiently small, the residual map acts cubically on that
+defect.
+
+Finally, Table~\ref{tab:two-sample-fifth-order-check} gives a small numerical
+check of the two-sample fifth-order residual in the $4:3$ branch.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+Input defect $e$ & Fifth-order residual & Observed scale \\
+\midrule
+$1^\circ$   & $+1.817122518225172\times 10^{-11}\!^\circ$ & $O(e^5)$ \\
+$0.1^\circ$ & $+1.817059574800297\times 10^{-16}\!^\circ$ & $O(e^5)$ \\
+$0.01^\circ$ & $+1.817058945385739\times 10^{-21}\!^\circ$ & $O(e^5)$ \\
+\bottomrule
+\end{tabular}
+\caption{Numerical check of the two-sample fifth-order residual for the $4:3$
+branch.  Reducing the input defect by a factor of $10$ reduces the residual by
+approximately $10^5$, as predicted by the expansion.}
+\label{tab:two-sample-fifth-order-check}
+\end{table}
+
+\section{Scope of the Result}
+\label{sec:scope}
+
+The result proved here is local, not global.  It is a theorem about the local
+asymptotic behavior of an explicit proportional-subtended residual operator.
+It does not assert that every branch gives a globally convergent angle-division
+algorithm, nor does it assert that every analytic branch has a direct finite
+compass-and-straightedge realization.
+
+The scope can be summarized as follows.
+
+\begin{enumerate}[label=\arabic*.]
+\item The analytic seed law holds locally for every positive integer pair
+$a,b$.
+
+\item The analytic residual law holds locally for every nonidentity branch
+$a\ne b$.
+
+\item The direct Euclidean realization is proved for the repeated-bisection
+subclass $a=2^m$.
+
+\item The one-transfer sharpness theorem applies only to residual corrections
+of the form $e-\Phiop_{a,b}(\lambda e)$.
+
+\item The two-sample calculation shows that higher order is possible after an
+additional chord sample is admitted, but it is not developed into a full
+construction theory here.
+\end{enumerate}
+
+These distinctions are important.  They keep the paper's main theorem broad
+where the analytic expansion is broad, and narrow where the finite construction
+record is narrow.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The proportional-subtended family gives a local cubic refinement law for
+approximate angle division.  The seed satisfies
+\[
+D_{a,b}(\theta)-\frac{\theta}{b}
+=
+\frac{a^2-b^2}{24a^2b^3}\theta^3+O(\theta^5),
+\]
+and the signed-defect residual operator satisfies
+\[
+\Rop_{a,b}(e)
+=
+-
+\frac{a^2-b^2}{24a^2}e^3+O(e^5).
+\]
+The defect scaling $b/a$ is the unique constant scaling that cancels the
+first-order defect in the one-transfer residual class.  Consequently, every
+residual correction triples the local error order:
+\[
+3\longrightarrow 9\longrightarrow 27\longrightarrow 81\longrightarrow\cdots .
+\]
+
+For $a=2^m$, the residual correction has a direct repeated-bisection
+straightedge-and-compass realization.  For general $a\ne b$, the local analytic
+error law remains valid, while the finite construction status is a separate
+question.  The two-sample chord calculation shows a natural route to
+fifth-order residuals and suggests a further problem: develop a systematic
+finite-construction theory for higher-order chord-combination corrections.
+
+\appendix
+
+\section{Symbolic Verification Recipe}
+\label{app:symbolic}
+
+The following symbolic computation verifies the displayed seed, residual, and
+two-sample chord coefficients.  It is included only as a reproducibility aid;
+the proofs above use the same formal series composition by hand.
+
+\begin{verbatim}
+import sympy as sp
+
+theta, e, x, y = sp.symbols('theta e x y')
+a, b, r = sp.symbols('a b r', positive=True)
+
+D = 2*sp.asin((a/b)*sp.sin(theta/(2*a)))
+print(sp.series(D - theta/b, theta, 0, 5))
+
+Phi = 2*sp.asin((a/b)*sp.sin(x/2))
+R = e - Phi.subs(x, (b/a)*e)
+print(sp.series(R, e, 0, 5))
+
+A = (4*r**2 - 1)/3
+B = 8*(1 - r**2)/3
+
+Q = 2*sp.asin(
+    r*(A*sp.sin(y/2) + B*sp.sin(y/4))
+)
+
+print(sp.factor(sp.series(Q - r*y, y, 0, 7)))
+print(sp.factor(sp.series(e - Q.subs(y, e/r), e, 0, 7)))
+\end{verbatim}
+
+\begin{thebibliography}{9}
+
+\bibitem{Wantzel1837}
+P.-L. Wantzel,
+``Recherches sur les moyens de reconnaitre si un probleme de geometrie peut se resoudre avec la regle et le compas,''
+\emph{Journal de Mathematiques Pures et Appliquees}, vol.~2, pp.~366--372, 1837.
+
+\bibitem{Durer1525}
+A. Durer,
+\emph{Underweysung der Messung mit dem Zirckel und Richtscheyt},
+Nuremberg, 1525.
+
+\bibitem{Householder1970}
+A. S. Householder,
+\emph{The Numerical Treatment of a Single Nonlinear Equation},
+McGraw--Hill, 1970.
+
+\bibitem{Traub1964}
+J. F. Traub,
+\emph{Iterative Methods for the Solution of Equations},
+Prentice--Hall, 1964.
+
+\bibitem{StoerBulirsch2002}
+J. Stoer and R. Bulirsch,
+\emph{Introduction to Numerical Analysis}, 3rd ed.,
+Texts in Applied Mathematics, vol.~12, Springer, New York, 2002.
+
+\bibitem{RostamianBaker}
+R. Rostamian,
+``An angle trisection: construction by Wayne Baker,''
+University of Maryland, Baltimore County, web note and error analysis,
+\url{https://userpages.umbc.edu/~rostamia/Geometry/trisect-baker.html},
+accessed July 13, 2026.
+
+\end{thebibliography}
+
+\end{document}
