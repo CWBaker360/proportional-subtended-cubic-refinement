@@ -129,6 +129,22 @@ accelerate polygonal approximations of π.
     └── first_repository_readme_patch.md
 
 ```
-## Rights
+## Licensing
 
-Copyright © 2026 Wayne Baker. All rights reserved unless otherwise stated.
+This repository uses a dual-license structure:
+
+- The manuscript text, LaTeX manuscript source, compiled PDF, figures,
+  documentation, and supporting written research materials are licensed under
+  the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
+  See [`LICENSE-PAPER.md`](LICENSE-PAPER.md).
+
+- Executable source code, scripts, and software utilities are licensed under
+  the **MIT License**. See [`LICENSE`](LICENSE).
+
+The LaTeX manuscript source is treated as research and publication material
+and is therefore licensed under CC BY 4.0.
+
+For the detailed scope of each license, see
+[`LICENSE_NOTICE.md`](LICENSE_NOTICE.md).
+
+Copyright © 2026 Wayne Baker.
