@@ -8,7 +8,7 @@ The authoritative source is:
 Paper/local_cubic_refinement_proportional_subtended.tex
 ```
 
-Compile from the `paper` directory using:
+Compile from the `Paper` directory using:
 
 ```bash
 pdflatex local_cubic_refinement_proportional_subtended.tex
