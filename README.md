@@ -10,8 +10,8 @@ This repository contains the LaTeX source and compiled PDF for:
 
 ## Read the paper
 
-- [Read the paper (PDF)](paper/local_cubic_refinement_proportional_subtended.pdf)
-- [LaTeX source](paper/local_cubic_refinement_proportional_subtended.tex)
+- [A Local Cubic Refinement Law for Proportional-Subtended Angle Division — PDF](paper/proportional-subtended-cubic-refinement.pdf)
+- [LaTeX source](paper/proportional-subtended-cubic-refinement.tex)
 
 ## Main result
 
