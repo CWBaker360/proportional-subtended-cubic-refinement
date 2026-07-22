@@ -1,11 +1,16 @@
 # License Notice
 
-Copyright © 2026 Wayne Baker.
+Copyright © 2026 Wayne Baker. All rights reserved.
 
-All rights reserved unless otherwise stated.
+Unless expressly stated otherwise in an individual file, no licence is granted
+to reproduce, distribute, modify, republish, sublicense, or create derivative
+works from the manuscript, compiled PDF, LaTeX source, repository
+documentation, figures, data, code, scripts, or other repository content.
 
-The manuscript, compiled paper, repository documentation, mathematical exposition, and associated source files may not be reproduced, redistributed, modified, or republished without prior written permission from the copyright holder, except where permitted by applicable law.
+Citation, limited quotation, and scholarly discussion are welcomed, provided
+that appropriate attribution is given and the use is permitted by applicable
+law.
 
-Citation and scholarly discussion of the results are welcomed, provided appropriate attribution is given.
-
-No separate open-source license is granted for code or scripts at this time.
+No open-source or open-content licence is granted for this repository at this
+time. Permission for uses beyond those permitted by law must be obtained from
+the copyright holder.
