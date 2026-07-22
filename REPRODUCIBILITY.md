@@ -5,7 +5,7 @@
 The authoritative source is:
 
 ```text
-paper/local_cubic_refinement_proportional_subtended.tex
+Paper/local_cubic_refinement_proportional_subtended.tex
 ```
 
 Compile from the `paper` directory using:
