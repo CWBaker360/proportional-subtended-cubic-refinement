@@ -10,8 +10,6 @@ This repository contains the LaTeX source and compiled PDF for:
 
 ## Read the paper
 
-## Read the paper
-
 - [Read the paper (PDF)](Paper/local_cubic_refinement_proportional_subtended.pdf)
 - [LaTeX source](Paper/local_cubic_refinement_proportional_subtended.tex)
 
