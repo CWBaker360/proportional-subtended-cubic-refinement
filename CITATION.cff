@@ -7,7 +7,7 @@ authors:
   - family-names: "Baker"
     given-names: "Wayne"
 
-version: "1.0.0"
+version: "1.0.1"
 date-released: "2026-07-22"
 
 repository-code: "https://github.com/CWBaker360/proportional-subtended-cubic-refinement"
