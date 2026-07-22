@@ -122,3 +122,7 @@ polygonal approximations.
     ├── repository_description.md
     ├── github_upload_checklist.md
     └── first_repository_readme_patch.md
+
+## Rights
+
+Copyright © 2026 Wayne Baker. All rights reserved unless otherwise stated.
