@@ -94,14 +94,19 @@ uniqueness and sharpness results.
 
 This paper is the second work in a three-paper research sequence:
 
-1. [A Constructible Cubic Error Cascade for Approximate Angle Trisection](https://github.com/CWBaker360/Constructible-Cubic-Trisection/releases/tag/v1.0.0)
-2. [A Local Cubic Refinement Law for Proportional-Subtended Angle Division](https://github.com/CWBaker360/proportional-subtended-cubic-refinement/releases/tag/v1.0.0)
-3. [A Constructive N-Series Acceleration Law for Polygonal Approximation of π](https://github.com/CWBaker360/N-Series-pi-acceleration/releases/tag/v1.0.0)
+1. [A Constructible Cubic Error Cascade for Approximate Angle Trisection](https://github.com/CWBaker360/Constructible-Cubic-Trisection/releases/latest)
+2. [A Local Cubic Refinement Law for Proportional-Subtended Angle Division](https://github.com/CWBaker360/proportional-subtended-cubic-refinement/releases/latest)
+3. [A Constructive N-Series Acceleration Law for Polygonal Approximation of π](https://github.com/CWBaker360/N-Series-pi-acceleration/releases/latest)
 
-The sequence progresses from a specific constructible approximation, through
-the general local cubic cancellation law, to higher-order acceleration of
-polygonal approximations.
+Together, the three papers develop the progression
 
+**constructible approximation → local cubic refinement → higher-order acceleration**.
+
+The first paper presents a specific constructible approximation and its cubic
+error cascade. The second derives the general proportional-subtended
+cancellation law and proves the uniqueness of the scaling that removes the
+linear residual term. The third applies structured asymptotic cancellation to
+accelerate polygonal approximations of π.
 ## Repository structure
 
 ```text
