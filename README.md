@@ -12,7 +12,7 @@ This repository contains the LaTeX source and compiled PDF for:
 
 - [Read the paper (PDF)](Paper/local_cubic_refinement_proportional_subtended.pdf)
 - [LaTeX source](Paper/local_cubic_refinement_proportional_subtended.tex)
-- [Version 1.0.0 release](https://github.com/CWBaker360/proportional-subtended-cubic-refinement/releases/tag/v1.0.0)
+- [Latest release](https://github.com/CWBaker360/proportional-subtended-cubic-refinement/releases/latest)
 
 ## Main result
 
@@ -123,6 +123,7 @@ polygonal approximations.
     ├── github_upload_checklist.md
     └── first_repository_readme_patch.md
 
+```
 ## Rights
 
 Copyright © 2026 Wayne Baker. All rights reserved unless otherwise stated.
