@@ -114,6 +114,8 @@ accelerate polygonal approximations of π.
 ├── README.md
 ├── CITATION.cff
 ├── REPRODUCIBILITY.md
+├── LICENSE
+├── LICENSE-PAPER.md
 ├── LICENSE_NOTICE.md
 ├── CHANGELOG.md
 ├── SHA256SUMS.txt
