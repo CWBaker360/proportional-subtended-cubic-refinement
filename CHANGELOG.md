@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.2 — 2026-07-22
+## v1.0.2 — 2026-07-23
 
 - Standardized the repository under a dual-license structure.
 - Added the MIT License for executable source code, scripts, and software utilities.
