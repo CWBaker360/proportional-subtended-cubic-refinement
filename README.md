@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="assets/Repo02_proportional-subtended-cubic-refinement.png"
+       alt="Infographic summarizing the local cubic refinement law for proportional-subtended angle division"
+       width="760">
+</p>
+
 # A Local Cubic Refinement Law for Proportional-Subtended Angle Division
 
 **Author:** Wayne Baker  
@@ -120,6 +126,8 @@ accelerate polygonal approximations of π.
 ├── CHANGELOG.md
 ├── SHA256SUMS.txt
 ├── .gitignore
+├── assets/
+│   └── Repo02_proportional-subtended-cubic-refinement.png
 ├── Paper/
 │   ├── local_cubic_refinement_proportional_subtended.tex
 │   ├── local_cubic_refinement_proportional_subtended.pdf
