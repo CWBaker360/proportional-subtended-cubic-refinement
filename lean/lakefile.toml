@@ -1,0 +1,153 @@
+name = "BakerTrisection"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["BakerProportionalCubicReleaseAudit_v1"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.36.0-rc2"
+
+[[lean_lib]]
+name = "BakerProportionalCubicReleaseAudit_v1"
+
+[[lean_lib]]
+name = "ArcsinChordThird"
+
+[[lean_lib]]
+name = "ArcsinComposition"
+
+[[lean_lib]]
+name = "ArcsinSecondDerivative"
+
+[[lean_lib]]
+name = "BakerCubicLimit"
+
+[[lean_lib]]
+name = "BakerNormalizedChordBasics_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedCubicJet_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedCubicLimitDenominator_v3"
+
+[[lean_lib]]
+name = "BakerNormalizedCubicLimitFinalLHopital_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedCubicLimitFirstLHopital_v2"
+
+[[lean_lib]]
+name = "BakerNormalizedCubicLimitSlope_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedCubicLimitThirdSlopeBridge_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedDerivativeGeneral_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedFirstDerivative_v3"
+
+[[lean_lib]]
+name = "BakerNormalizedLocalDomain_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedSecondDerivativeBridge_v2"
+
+[[lean_lib]]
+name = "BakerNormalizedSecondDerivativeCore_v4"
+
+[[lean_lib]]
+name = "BakerNormalizedSecondDerivativePrep_v2"
+
+[[lean_lib]]
+name = "BakerNormalizedThirdDerivativeAlgebra_v2"
+
+[[lean_lib]]
+name = "BakerNormalizedThirdDerivativeBridge_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedThirdDerivativeCertificate_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedThirdDerivativeDenominator_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedThirdDerivativePrep_v2"
+
+[[lean_lib]]
+name = "BakerNormalizedThirdDerivativeQuotient_v1"
+
+[[lean_lib]]
+name = "BakerNormalizedThirdDerivativeReducedCore_v2"
+
+[[lean_lib]]
+name = "BakerProportionalChord_v2"
+
+[[lean_lib]]
+name = "BakerProportionalCubicAnchor_v2"
+
+[[lean_lib]]
+name = "BakerProportionalCubicLimit_v3"
+
+[[lean_lib]]
+name = "BakerProportionalResidual_v1"
+
+[[lean_lib]]
+name = "BakerProportionalScaling_v3"
+
+[[lean_lib]]
+name = "BakerResidual"
+
+[[lean_lib]]
+name = "InnerDerivativeChain"
+
+[[lean_lib]]
+name = "InnerIteratedDerivatives"
+
+[[lean_lib]]
+name = "InnerThirdDerivative"
+
+[[lean_lib]]
+name = "OuterArcsinBasics"
+
+[[lean_lib]]
+name = "OuterArcsinThird"
+
+[[lean_lib]]
+name = "OuterSineDerivatives"
+
+[[lean_lib]]
+name = "ResidualLocalSmooth"
+
+[[lean_lib]]
+name = "ResidualTaylorInterval"
+
+[[lean_lib]]
+name = "ResidualTaylorPolynomial"
+
+[[lean_lib]]
+name = "ResidualTaylorPrereqs"
+
+[[lean_lib]]
+name = "ResidualTaylorRemainder"
+
+[[lean_lib]]
+name = "ResidualThirdDerivative"
+
+[[lean_lib]]
+name = "SecondDerivative"
+
+[[lean_lib]]
+name = "ThirdOrderComposition"
+
+[[lean_lib]]
+name = "TrisectionSeedLimit"
