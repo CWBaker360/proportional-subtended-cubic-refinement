@@ -78,6 +78,23 @@ $$
 3,\;9,\;27,\;81,\ldots
 $$
 
+## Lean 4 formal verification (November 20, 2026)
+
+The reproducible [Lean source release](lean/) verifies the **leading cubic-limit coefficient** of the proportional-chord residual:
+
+$$
+\lim_{\theta\to 0}
+\frac{D_{a,b}(\theta)-\theta/b}{\theta^3}
+= \frac{a^2-b^2}{24a^2b^3},
+\qquad a,b\in\mathbb R\setminus\{0\}.
+$$
+
+This includes Baker's \(4{:}3\) coefficient \(7/10368\) and the equal-parameter case. The Lean theorem applies to nonzero **real** parameters, broader than the positive integers in the manuscript.
+
+**Formal-verification scope:** This release proves the cubic *limit*. It does **not** formalize the \(O(\theta^5)\) remainder, the nonlinear residual \(\mathcal R_{a,b}(e)\) law, uniqueness of the \(b/a\) scaling, or the iterated \(3,9,27,\ldots\) order sequence.
+
+See [Lean reproducibility instructions](lean/README-REPRODUCE.txt). The proof chain completed a fresh Windows build (18,270 Lake jobs) and a separate definition audit (exit code 0) on November 20, 2026. GitHub Actions independently checks the Linux build and axiom reports.
+
 ## Scope
 
 The theorem is local and asymptotic. It is not a global angle-division theorem.
@@ -126,6 +143,7 @@ accelerate polygonal approximations of π.
 ├── CHANGELOG.md
 ├── SHA256SUMS.txt
 ├── .gitignore
+├── lean/                   # Lean 4 verified source release
 ├── assets/
 │   └── Repo02_proportional-subtended-cubic-refinement.png
 ├── Paper/

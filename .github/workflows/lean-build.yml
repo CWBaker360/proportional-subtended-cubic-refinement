@@ -1,0 +1,68 @@
+name: Lean build and axiom audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lean
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Verify GitHub SHA-256 manifests
+        working-directory: .
+        run: |
+          sha256sum --check SHA256SUMS.txt
+          (cd lean && sha256sum --check SHA256SUMS.txt)
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get
+
+      - name: Build Lean proof chain
+        run: lake build
+
+      - name: Definition and axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean BakerProportionalReleaseDefinitionAudit_v1.lean 2>&1 | tee audit.txt
+          python3 - <<'PY_AUDIT'
+          import re
+          from pathlib import Path
+
+          output = Path("audit.txt").read_text()
+          if "sorryAx" in output:
+              raise SystemExit("FAIL: sorryAx found")
+          theorems = {
+              "BakerTrisection.proportionalChord_cubic_limit_explicit",
+              "BakerTrisection.proportionalChord_cubic_limit_four_three_release",
+              "BakerTrisection.proportionalChord_cubic_limit_equal_release",
+          }
+          reports = re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", output, flags=re.S)
+          found = {}
+          for name, axioms in reports:
+              if name in theorems:
+                  if name in found:
+                      raise SystemExit("FAIL: duplicate axiom report for " + name)
+                  found[name] = {a.strip() for a in axioms.split(",") if a.strip()}
+          if set(found) != theorems:
+              raise SystemExit("FAIL: missing theorem axiom reports: " + str(theorems - set(found)))
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for name, axioms in found.items():
+              if axioms != allowed:
+                  raise SystemExit("FAIL: unexpected axioms for " + name + ": " + repr(axioms))
+          print("PASS: all three theorems use only standard Lean axioms")
+          PY_AUDIT
